@@ -7,7 +7,8 @@ let currentPage = null;
 playerName = prompt('What is your name?');
 
 // Function `getCurrentPage()`accepts one parameter, the `slug` for the 
-//current page. Fetches the current page and returns a page object using the //`slug` value for a key.
+//current page. Fetches the current page and returns a page object using the 
+//`slug` value for a key.
 function getCurrentPage(slug){
   currentPage = storyData [slug];
   return currentPage;
