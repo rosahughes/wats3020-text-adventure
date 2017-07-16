@@ -3,42 +3,44 @@ let playerName = "";
 let choiceList = [];
 let currentPage = null;
 
-///////////////////////////////////////////////////
-//////// TODOs ///////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-// Fill in the blanks below to complete each TODO task.                       //
-////////////////////////////////////////////////////////////////////////////////
+// Prompt user for their name, stored in the variable `playerName`.
+playerName = prompt('What is your name?');
 
-// TODO: Prompt the user for their name. Store the name in the variable `playerName`.
+// Function `getCurrentPage()`accepts one parameter, the `slug` for the 
+//current page. Fetches the current page and returns a page object using the //`slug` value for a key.
+function getCurrentPage(slug){
+  currentPage = storyData [slug];
+  return currentPage;
+}
 
+// Function `recordChoice()` accepts a `slug`parameter and adds it 
+//to the `choiceList` Array using `push()`.
+function recordChoice(slug){
+  choiceList.push(slug);
+  console.log(`Added ${slug} to choiceList Array.`);
+}
 
+// Function called `undoChoice()` removes the last `slug` in the `choiceList`
+// Array and then return the last `slug` in the `choiceList` Array.
+function undoChoice(){
+  choiceList.pop(); // Remove the last item in the choiceList Array
+  console.log(`Returning to previous page.`); 
+  return choiceList[choiceList.length-1];
+}
 
-// TODO: Create a function called `getCurrentPage()`. It should accept one
-// parameter, which is the `slug` for the current page. This function will fetch
-// the current page and return a page object using the `slug` value for a key.
-
-
-
-// TODO: Create a function called `recordChoice()` that will accept a `slug`
-// parameter and add it to the `choiceList` Array (probably using `push()`).
-
-
-
-// TODO: Create a function called `undoChoice()` that will remove the last
-// `slug` in the `choiceList` Array and then will return the last `slug` in the
-// `choiceList` Array.
-
-
-
-// TODO: Create a function called `changePage()` that accepts a parameter called
-// `slug` and which handles "turning the page" in three steps:
-//  1. It should call the `recordChoice()` function (and give it the `slug` as
-//     a parameter.
-//  2. It should set the `currentPage` value by calling the `getCurrentPage()`
-//     function (and give it the `slug` as a parameter).
-//  3. It should invoke the `updatePage()` function (and give it the
-//     `currentPage` object as a parameter).
-
+// Function called `changePage()` that accepts a parameter called
+// `slug` and handles "turning the page" in three steps:
+//  1. Call the `recordChoice()` function with `slug` as a parameter.
+//  2. Set the `currentPage` value by calling the `getCurrentPage()`
+//     function with `slug` as a parameter.
+//  3. Invoke the `updatePage()` function with the `currentPage` object 
+//     as a parameter.
+function changePage(slug){
+  // Record the latest choice
+  recordChoice(slug);
+  currentPage = getCurrentPage(slug);
+  updatePage(currentPage);
+}
 
 
 ///////////////////////////////////////////////////
@@ -258,5 +260,6 @@ undo.addEventListener('click', function(e){
 })
 
 currentPage = storyData.p1;
+recordChoice('p1');
 updatePage(currentPage);
 
